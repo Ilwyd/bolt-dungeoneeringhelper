@@ -1,3 +1,5 @@
+-- Taken from https://github.com/kyleconroy/lua-state-machine/
+
 local machine = {}
 machine.__index = machine
 

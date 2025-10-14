@@ -22,6 +22,8 @@
 -- SOFTWARE.
 --
 
+-- Taken from https://github.com/rxi/json.lua
+
 local json = { _version = "0.1.2" }
 
 -------------------------------------------------------------------------------
