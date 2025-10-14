@@ -14,7 +14,6 @@
 
         function updateImages(message) {
             const messageString = new TextDecoder().decode(message.data.content)
-            // const messageString = '{"floorsize": "medium", "rooms": [[[],{"roomshape":"l_n", "key": "crimsoncrescent"},{"roomshape":"o_nes"},{"roomshape":"o_ns"},{"roomshape":"l_s","key":"bluerectangle"},[],[],[]],[[],[],{"roomshape":"l_w"},[],[],[],[],[]],[[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[]]]}'
             const data = JSON.parse(messageString)
 
             const canvas = document.getElementById("keys")
