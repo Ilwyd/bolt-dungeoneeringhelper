@@ -39,6 +39,7 @@ local keydoors = {
                 { 64, 141, 205 },
                 { 61, 137, 203 }, -- Triangle
                 { 64, 140, 205 }, -- Rectangle
+                { 61, 138, 203 }, -- Diamond
             }
         },
         crimson = {
@@ -69,6 +70,7 @@ local keydoors = {
                 { 215, 110, 89 }, -- Pentagon
                 { 215, 111, 91 }, -- Corner
                 { 216, 113, 92 }, -- Wedge
+                { 215, 110, 90 }, -- Corner
             }
         },
         purple = {
@@ -93,6 +95,7 @@ local keydoors = {
                 { 245, 235, 143 }, -- Shield
                 { 245, 235, 144 }, -- Corner
                 { 245, 235, 143 }, -- Crescent
+                { 245, 234, 141 }, -- Crescent
             }
         }
     }
