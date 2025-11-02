@@ -60,6 +60,7 @@ local keydoors = {
                 { 76, 188, 125 },
                 { 75, 187, 124 }, -- Triangle
                 { 78, 189, 126 }, -- Diamond
+                { 79, 189, 127 }, -- Diamond
             }
         },
         orange = {
@@ -140,15 +141,16 @@ local gatestones = {
     groupgatestone = {
         vertcount = 585,
         zerothvertpos = { 40, 76, 36 },
-        zerothvertcolour = { 63, 94, 123, 1.0 }
+        zerothvertcolour = { 66, 97, 126 }
     },
-    gatestone1 = {
+    gatestone = {
         vertcount = 585,
         zerothvertpos = { 40, 76, 36 },
-        zerothvertcolour = { 72, 115, 102, 1.0 }
+        zerothvertcolour = { 76, 118, 105 }
     }
 }
 
 return {
-    keydoors = keydoors
+    keydoors = keydoors,
+    gatestones = gatestones
 }

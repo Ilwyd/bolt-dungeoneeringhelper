@@ -17,7 +17,7 @@ local function log(msg)
 end
 
 local function dotablesmatch(table1, table2)
-    if table.concat(table1) == table.concat(table2) then
+    if table.concat(table1, '|') == table.concat(table2, '|') then
         return true
     end
 

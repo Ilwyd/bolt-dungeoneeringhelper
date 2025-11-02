@@ -164,7 +164,10 @@ function Map:update(event)
 end
 
 function Map:update3d(event)
-    return self:setRoomKeys(event)
+    local keysupdated = self:setRoomKeys(event)
+    local gatestoneupdated = self:setGatestone(event)
+
+    return keysupdated or gatestoneupdated
 end
 
 function Map:setRoomKeys(event)
@@ -193,6 +196,59 @@ function Map:setRoomKeys(event)
     end
 
     return false
+end
+
+function Map:setGatestone(event)
+    local vertexcount = event:vertexcount()
+    local modelpoint = event:vertexpoint(0)
+    
+    local mx, my, mz = event:vertexpoint(0):get()
+    local zerothvertpos = { mx, my, mz }
+    
+    local r, g, b, _ = event:vertexcolour(0)
+    local zerothvertcolour = {
+        math.floor(r * 255 + 0.5),
+        math.floor(g * 255 + 0.5),
+        math.floor(b * 255 + 0.5)
+    }
+
+    for gatestone, data in pairs(models.gatestones) do
+        local samevertcount = vertexcount == data.vertcount
+        local samezerothvertpos = helpers.dotablesmatch(zerothvertpos, data.zerothvertpos)
+        local samecolour = helpers.dotablesmatch(zerothvertcolour, data.zerothvertcolour)
+
+        if samecolour or samevertcount or samezerothvertpos then
+            print(vertexcount, data.vertcount)
+            print(table.concat(zerothvertpos, '|'), table.concat(data.zerothvertpos, '|'))
+            print(table.concat(zerothvertcolour, '|'), table.concat(data.zerothvertcolour, '|'))
+            print()
+        end
+
+        if samecolour and samevertcount and samezerothvertpos then
+            local worldpoint = modelpoint:transform(event:modelmatrix())
+            local x, _, z = worldpoint:get()
+            x = math.floor(x/512)
+            z = math.floor(z/512)
+            local roomcoords = self:getRoom(x, z)
+
+            self:clearGatestone(gatestone)
+            self.rooms[roomcoords.x][roomcoords.y].gatestone = gatestone
+
+            return true
+        end
+    end
+
+    return false
+end
+
+function Map:clearGatestone(gatestone)
+    for x = 1, #self.rooms do
+        for y = 1, #self.rooms[x] do
+            if self.rooms[x][y].gatestone == gatestone then
+                self.rooms[x][y].gatestone = nil
+            end
+        end
+    end
 end
 
 -- Get a room based on the world x and z coords
