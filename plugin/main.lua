@@ -37,6 +37,9 @@ local function findfloorsize(event)
 	return nil
 end
 
+--- Checks to see if the player is in the dungeon by attempting to find the dungeoneering map button on the minimap
+--- @param event bolt.Batch2D The batch 2d event to check
+--- @return boolean
 local function isindungeon(event)
 	for i = 1, event:vertexcount() do
 		if
