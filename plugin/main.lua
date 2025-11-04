@@ -110,7 +110,7 @@ local statemachine = machine.create({
 })
 
 bolt.onrender3d(function(event)
-	if statemachine:is("notindungeon") or not event:animated() then
+	if statemachine:is("notindungeon") then
 		return
 	end
 

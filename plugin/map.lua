@@ -168,8 +168,14 @@ function Map:update(event)
 end
 
 function Map:update3d(event)
-	local keysupdated = self:setRoomKeys(event)
-	local gatestoneupdated = self:setGatestone(event)
+	local keysupdated = false
+	local gatestoneupdated = false
+
+	if event:animated() then
+		keysupdated = self:setRoomKeys(event)
+	else
+		gatestoneupdated = self:setGatestone(event)
+	end
 
 	return keysupdated or gatestoneupdated
 end
@@ -297,4 +303,3 @@ function Map:getRoomCenter(x, y)
 		z = self.basetile.z + (y - 1) * 16 + 8,
 	}
 end
-
