@@ -101,7 +101,7 @@ local statemachine = machine.create({
 				floormap.background.h,
 				"plugin://webpage/index.html"
 			)
-			browser:showdevtools()
+			-- browser:showdevtools()
 		end,
 		onleftdungeon = function(self, event, from, to)
 			floormap = nil
