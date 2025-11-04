@@ -228,13 +228,6 @@ function Map:setGatestone(event)
 		local samezerothvertpos = helpers.dotablesmatch(zerothvertpos, data.zerothvertpos)
 		local samecolour = helpers.dotablesmatch(zerothvertcolour, data.zerothvertcolour)
 
-		if samecolour or samevertcount or samezerothvertpos then
-			print(vertexcount, data.vertcount)
-			print(table.concat(zerothvertpos, "|"), table.concat(data.zerothvertpos, "|"))
-			print(table.concat(zerothvertcolour, "|"), table.concat(data.zerothvertcolour, "|"))
-			print()
-		end
-
 		if samecolour and samevertcount and samezerothvertpos then
 			local worldpoint = modelpoint:transform(event:modelmatrix())
 			local x, _, z = worldpoint:get()
