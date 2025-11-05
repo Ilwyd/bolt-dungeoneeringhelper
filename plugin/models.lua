@@ -40,6 +40,7 @@ local keydoors = {
 				{ 61, 137, 203 }, -- Triangle
 				{ 64, 140, 205 }, -- Rectangle
 				{ 61, 138, 203 }, -- Diamond
+				{ 63, 140, 204 }, -- Shield
 			},
 		},
 		crimson = {
@@ -54,6 +55,7 @@ local keydoors = {
 		gold = {
 			zerothvertcolours = {
 				{ 221, 184, 118 },
+				{ 222, 185, 121 }, -- Corner
 			},
 		},
 		green = {
@@ -144,12 +146,20 @@ local gatestones = {
 	groupgatestone = {
 		vertcount = 585,
 		zerothvertpos = { 40, 76, 36 },
-		zerothvertcolour = { 66, 97, 126 },
+		zerothvertcolourrange = {
+			r = { 63, 65 },
+			g = { 95, 96 },
+			b = { 124, 125 },
+		},
 	},
 	gatestone = {
 		vertcount = 585,
 		zerothvertpos = { 40, 76, 36 },
-		zerothvertcolour = { 76, 118, 105 },
+		zerothvertcolourrange = {
+			r = { 73, 75 },
+			g = { 116, 118 },
+			b = { 103, 105 },
+		},
 	},
 }
 

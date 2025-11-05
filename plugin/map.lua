@@ -216,29 +216,33 @@ function Map:setGatestone(event)
 	local mx, my, mz = event:vertexpoint(0):get()
 	local zerothvertpos = { mx, my, mz }
 
-	local r, g, b, _ = event:vertexcolour(0)
+	local r, g, b, _ = event:vertexcolour(1)
 	local zerothvertcolour = {
-		math.floor(r * 255 + 0.5),
-		math.floor(g * 255 + 0.5),
-		math.floor(b * 255 + 0.5),
+		r = math.floor(r * 255 + 0.5),
+		g = math.floor(g * 255 + 0.5),
+		b = math.floor(b * 255 + 0.5),
 	}
 
 	for gatestone, data in pairs(models.gatestones) do
 		local samevertcount = vertexcount == data.vertcount
 		local samezerothvertpos = helpers.dotablesmatch(zerothvertpos, data.zerothvertpos)
-		local samecolour = helpers.dotablesmatch(zerothvertcolour, data.zerothvertcolour)
+		local incolourrange = helpers.iscolourinrange(zerothvertcolour, data.zerothvertcolourrange)
 
-		if samecolour and samevertcount and samezerothvertpos then
+		if incolourrange and samevertcount and samezerothvertpos then
 			local worldpoint = modelpoint:transform(event:modelmatrix())
 			local x, _, z = worldpoint:get()
 			x = math.floor(x / 512)
 			z = math.floor(z / 512)
 			local roomcoords = self:getRoom(x, z)
 
-			self:clearGatestone(gatestone)
-			self.rooms[roomcoords.x][roomcoords.y].gatestone = gatestone
+			if self.rooms[roomcoords.x][roomcoords.y].gatestone ~= gatestone then
+				self:clearGatestone(gatestone)
+				self.rooms[roomcoords.x][roomcoords.y].gatestone = gatestone
 
-			return true
+				return true
+			else
+				return false
+			end
 		end
 	end
 

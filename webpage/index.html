@@ -30,6 +30,12 @@
                             ctx.drawImage(image, x * 32, canvas.height - ((y + 1) * 32) + 6)
                         }
                         image.src = "./images/keys/" + data.rooms[x][y].key + ".png"
+                    } else if (data.rooms[x][y].hasOwnProperty("gatestone")) {
+                        const image = new Image()
+                        image.onload = function(event) {
+                          ctx.drawImage(image, x * 32, canvas.height - ((y + 1) * 32) + 6)
+                        }
+                        image.src = "./images/gatestones/" + data.rooms[x][y].gatestone + ".png"
                     }
                 }
             }
