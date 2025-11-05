@@ -9,6 +9,7 @@ local json = require("plugin.json")
 local floormap = nil
 local browser = nil
 local updated = false
+local isplayerindungeon = false
 
 --- Find the floorsize from the given Batch2D event, if any
 --- @param event any The Batch2D event to be checked for the floorsize
@@ -85,17 +86,18 @@ local statemachine = machine.create({
 		{ name = "joineddungeon", from = "notindungeon", to = "indungeonfindingmap" },
 		{ name = "foundmap", from = "indungeonfindingmap", to = "indungeon" },
 		{ name = "leftdungeon", from = { "indungeon", "indungeonfindingmap" }, to = "notindungeon" },
-		{ name = "maphidden", from = "indungeon", to = "indungeonnomap" },
+		{ name = "maphidden", from = "indungeon", to = "indungeonfindingmap" },
 	},
 	callbacks = {
-		onindungeonnomap = function(self, event, from, to)
-			helpers.log("Player entered a dungeon! :^)")
+		onstatechange = function(self, event, from, to)
+			helpers.log("State changed from " .. from .. " to " .. to)
 		end,
+
+		onindungeonnomap = function(self, event, from, to) end,
+
 		-- When the map is found on the player's screen:
 		-- Set up the browser on top of the in-game dungeon map
 		onfoundmap = function(self, event, from, to)
-			helpers.log("Found the map")
-
 			if floormap == nil then
 				return
 			end
@@ -112,6 +114,7 @@ local statemachine = machine.create({
 			)
 			browser:showdevtools()
 		end,
+
 		-- When the player leaves the dungeon:
 		-- Set the floormap to nil
 		-- Get rid of the browser overlay on the map
@@ -119,7 +122,7 @@ local statemachine = machine.create({
 			floormap = nil
 
 			if browser ~= nil then
-				browser.close()
+				browser:close()
 			end
 		end,
 	},
@@ -142,8 +145,12 @@ end)
 bolt.onrender2d(function(event)
 	local wasupdated = false
 
+	if not isplayerindungeon then
+		isplayerindungeon = isindungeon(event)
+	end
+
 	-- Check to see if the player is in a dungeon
-	if statemachine:is("notindungeon") and isindungeon(event) then
+	if statemachine:is("notindungeon") and isplayerindungeon then
 		statemachine:joineddungeon()
 	end
 
@@ -176,4 +183,10 @@ bolt.onswapbuffers(function(event)
 		senddata()
 		updated = false
 	end
+
+	if not isplayerindungeon and (statemachine:is("indungeon") or statemachine:is("indungeonfindingmap")) then
+		statemachine:leftdungeon()
+	end
+
+	isplayerindungeon = false
 end)
