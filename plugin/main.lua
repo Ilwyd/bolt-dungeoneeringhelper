@@ -68,7 +68,7 @@ local function isindungeon(event)
 	return false
 end
 
---- Sends data on the floor to the browser
+--- Converts floor data to a JSON string and sends it to the browser to be displayed on the map
 local function senddata()
 	if browser == nil or floormap == nil then
 		return
