@@ -29,16 +29,14 @@ end
 local function findcolour(event)
 	local r, g, b, _ = event:vertexcolour(0)
 	local zerothvertcolour = {
-		math.floor(r * 255 + 0.5),
-		math.floor(g * 255 + 0.5),
-		math.floor(b * 255 + 0.5),
+		r = math.floor(r * 255 + 0.5),
+		g = math.floor(g * 255 + 0.5),
+		b = math.floor(b * 255 + 0.5),
 	}
 
 	for colour, data in pairs(models.keydoors.colours) do
-		for _, colourdata in ipairs(data.zerothvertcolours) do
-			if helpers.dotablesmatch(zerothvertcolour, colourdata) then
-				return colour
-			end
+		if helpers.iscolourinrange(zerothvertcolour, data.zerothvertcolourrange) then
+			return colour
 		end
 	end
 end

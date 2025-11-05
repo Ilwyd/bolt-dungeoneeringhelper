@@ -49,9 +49,9 @@ local function tprint(tbl, indent)
 end
 
 local function iscolourinrange(colour, colourrange)
-	local inrrange = colour.r >= colourrange.r[1] or colour.r <= colourrange.r[2]
-	local ingrange = colour.r >= colourrange.g[1] or colour.g <= colourrange.g[2]
-	local inbrange = colour.r >= colourrange.b[1] or colour.b <= colourrange.b[2]
+	local inrrange = colour.r >= colourrange.r[1] and colour.r <= colourrange.r[2]
+	local ingrange = colour.g >= colourrange.g[1] and colour.g <= colourrange.g[2]
+	local inbrange = colour.b >= colourrange.b[1] and colour.b <= colourrange.b[2]
 	local incolourrange = inrrange and ingrange and inbrange
 
 	return incolourrange

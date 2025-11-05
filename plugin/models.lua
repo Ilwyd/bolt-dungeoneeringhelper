@@ -35,69 +35,59 @@ local keydoors = {
 	},
 	colours = {
 		blue = {
-			zerothvertcolours = {
-				{ 64, 141, 205 },
-				{ 61, 137, 203 }, -- Triangle
-				{ 64, 140, 205 }, -- Rectangle
-				{ 61, 138, 203 }, -- Diamond
-				{ 63, 140, 204 }, -- Shield
+			zerothvertcolourrange = {
+				r = { 61, 64 },
+				g = { 137, 141 },
+				b = { 203, 205 },
 			},
 		},
 		crimson = {
-			zerothvertcolours = {
-				{ 138, 43, 49 },
-				{ 135, 40, 46 },
-				{ 136, 41, 47 }, -- Diamond
-				{ 137, 42, 48 }, -- Crescent
-				{ 138, 43, 49 }, -- Pentagon
+			zerothvertcolourrange = {
+				r = { 135, 138 },
+				g = { 40, 43 },
+				b = { 46, 49 },
 			},
 		},
 		gold = {
-			zerothvertcolours = {
-				{ 221, 184, 118 },
-				{ 222, 185, 121 }, -- Corner
+			zerothvertcolourrange = {
+				r = { 221, 222 },
+				g = { 184, 185 },
+				b = { 118, 121 },
 			},
 		},
 		green = {
-			zerothvertcolours = {
-				{ 76, 188, 125 },
-				{ 75, 187, 124 }, -- Triangle
-				{ 78, 189, 126 }, -- Diamond
-				{ 79, 189, 127 }, -- Diamond
+			zerothvertcolourrange = {
+				r = { 75, 79 },
+				g = { 187, 189 },
+				b = { 124, 127 },
 			},
 		},
 		orange = {
-			zerothvertcolours = {
-				{ 215, 111, 90 },
-				{ 215, 110, 89 }, -- Pentagon
-				{ 215, 111, 91 }, -- Corner
-				{ 216, 113, 92 }, -- Wedge
-				{ 215, 110, 90 }, -- Corner
+			zerothvertcolourrange = {
+				r = { 215, 216 },
+				g = { 110, 113 },
+				b = { 89, 92 },
 			},
 		},
 		purple = {
-			zerothvertcolours = {
-				{ 118, 94, 216 },
-				{ 117, 93, 216 },
-				{ 117, 93, 215 },
-				{ 120, 96, 217 }, -- Diamond
+			zerothvertcolourrange = {
+				r = { 117, 120 },
+				g = { 93, 96 },
+				b = { 215, 217 },
 			},
 		},
 		silver = {
-			zerothvertcolours = {
-				{ 197, 189, 188 },
-				{ 196, 189, 188 }, -- Wedge
-				{ 198, 191, 190 }, -- Crescent
+			zerothvertcolourrange = {
+				r = { 196, 198 },
+				g = { 189, 191 },
+				b = { 188, 190 },
 			},
 		},
 		yellow = {
-			zerothvertcolours = {
-				{ 245, 234, 141 }, -- Corner
-				{ 245, 235, 142 },
-				{ 245, 235, 143 }, -- Shield
-				{ 245, 235, 144 }, -- Corner
-				{ 245, 235, 143 }, -- Crescent
-				{ 245, 234, 141 }, -- Crescent
+			zerothvertcolourrange = {
+				r = { 245, 245 },
+				g = { 234, 235 },
+				b = { 141, 144 },
 			},
 		},
 	},
