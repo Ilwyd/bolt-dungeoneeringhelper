@@ -6,6 +6,10 @@ local machine = require("plugin.statemachine")
 local map = require("plugin.map")
 local json = require("plugin.json")
 
+local floormap = nil
+local browser = nil
+local updated = false
+
 --- Find the floorsize from the given Batch2D event, if any
 --- @param event any The Batch2D event to be checked for the floorsize
 --- @return { size: string, x: integer, y: integer, w: integer, h: integer } | nil
@@ -64,10 +68,7 @@ local function isindungeon(event)
 	return false
 end
 
-local floormap = nil
-local browser = nil
-local updated = false
-
+--- Sends data on the floor to the browser
 local function senddata()
 	if browser == nil or floormap == nil then
 		return
