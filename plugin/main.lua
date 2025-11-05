@@ -6,21 +6,27 @@ local machine = require("plugin.statemachine")
 local map = require("plugin.map")
 local json = require("plugin.json")
 
-local floorsize
-
+--- Find the floorsize from the given Batch2D event, if any
+--- @param event any The Batch2D event to be checked for the floorsize
+--- @return { size: string, x: integer, y: integer, w: integer, h: integer } | nil
 local function findfloorsize(event)
 	local i = 1
 	while i < event:vertexcount() do
+		-- Get the x and y coords of the bottom right and top left vertices
 		local brx, bry = event:vertexxy(i)
 		local tlx, tly = event:vertexxy(i + 2)
+
+		-- Get the bottom left x and y coords based off of the above
 		local blx = tlx
 		local bly = bry
 
+		-- Derive the width and height of the texture
 		local w = brx - tlx
 		local h = bry - tly
 
 		local _, _, _, a = event:vertexcolour(i)
 
+		-- Loop through the data we have on each floorsize (width, height, alpha of the dungeoneering map's background)
 		for floorsize, data in pairs(textures.dungeonmap.background) do
 			if w == data.w and h == data.h and math.floor(a * 255) == math.floor(data.a * 255) then
 				return {
@@ -84,6 +90,8 @@ local statemachine = machine.create({
 		onindungeonnomap = function(self, event, from, to)
 			helpers.log("Player entered a dungeon! :^)")
 		end,
+		-- When the map is found on the player's screen:
+		-- Set up the browser on top of the in-game dungeon map
 		onfoundmap = function(self, event, from, to)
 			helpers.log("Found the map")
 
@@ -103,8 +111,15 @@ local statemachine = machine.create({
 			)
 			browser:showdevtools()
 		end,
+		-- When the player leaves the dungeon:
+		-- Set the floormap to nil
+		-- Get rid of the browser overlay on the map
 		onleftdungeon = function(self, event, from, to)
 			floormap = nil
+
+			if browser ~= nil then
+				browser.close()
+			end
 		end,
 	},
 })
