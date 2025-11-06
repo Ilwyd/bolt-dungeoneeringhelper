@@ -65,13 +65,13 @@ local keydoors = {
 		orange = {
 			zerothvertcolourrange = {
 				r = { 215, 216 },
-				g = { 110, 113 },
-				b = { 89, 92 },
+				g = { 110, 114 },
+				b = { 89, 93 },
 			},
 		},
 		purple = {
 			zerothvertcolourrange = {
-				r = { 117, 120 },
+				r = { 117, 121 },
 				g = { 93, 96 },
 				b = { 215, 217 },
 			},
