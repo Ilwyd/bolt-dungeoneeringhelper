@@ -89,12 +89,6 @@ local generateMap = {
 	large = generateEmptyMap(8, 8),
 }
 
-local sizeDimensions = {
-	small = { x = 4, y = 4 },
-	medium = { x = 4, y = 8 },
-	large = { x = 8, y = 8 },
-}
-
 function Map:new(size, x, y, w, h)
 	local obj = {}
 	setmetatable(obj, Map)
@@ -199,8 +193,8 @@ function Map:setRoomKeys(event)
 		{ x = roomcoords.x + doordirectionfromcenter.x, y = roomcoords.y + doordirectionfromcenter.y }
 	local key = doortype.colour .. "" .. doortype.shape
 
-	if self.rooms[lockedroomcoords.x][lockedroomcoords.y].key ~= key then
-		self.rooms[lockedroomcoords.x][lockedroomcoords.y].key = key
+	if self.rooms[lockedroomcoords.x][lockedroomcoords.y]["key"] ~= key then
+		self.rooms[lockedroomcoords.x][lockedroomcoords.y]["key"] = key
 		return true
 	end
 
@@ -233,9 +227,9 @@ function Map:setGatestone(event)
 			z = math.floor(z / 512)
 			local roomcoords = self:getRoom(x, z)
 
-			if self.rooms[roomcoords.x][roomcoords.y].gatestone ~= gatestone then
+			if self.rooms[roomcoords.x][roomcoords.y]["gatestone"] ~= gatestone then
 				self:clearGatestone(gatestone)
-				self.rooms[roomcoords.x][roomcoords.y].gatestone = gatestone
+				self.rooms[roomcoords.x][roomcoords.y]["gatestone"] = gatestone
 
 				return true
 			else
@@ -275,6 +269,12 @@ function Map:setRegionBase()
 	local px, _, pz = bolt.playerposition():get()
 	px = px / 512
 	pz = pz / 512
+
+	-- If the player is not yet in an instance return
+	-- When first joining the dungeon the player's coordinates can still be set to outside
+	if px < 6400 then
+		return
+	end
 
 	-- Base tile of the player's current region.
 	local currRegionBase = {
