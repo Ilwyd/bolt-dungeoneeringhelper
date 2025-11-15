@@ -76,7 +76,6 @@ local function senddata()
 	end
 
 	local message = '{ "floorsize": "' .. floormap.size .. '", "rooms": ' .. json.encode(floormap.rooms) .. "}"
-	print(json.encode(floormap.rooms))
 
 	browser:sendmessage(message)
 end

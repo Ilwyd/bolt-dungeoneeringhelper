@@ -2,7 +2,6 @@ local textures = require("plugin.textures")
 local helpers = require("plugin.helpers")
 local models = require("plugin.models")
 local bolt = require("bolt")
-local json = require("plugin.json")
 
 Map = {
 	rooms = {}, -- Array holding room details
@@ -100,15 +99,6 @@ function Map:new(size, x, y, w, h)
 	self.bottomleft.y = y
 	self.background.w = w
 	self.background.h = h
-
-	print("New")
-	print(self.size, size)
-	print(json.encode(self.rooms))
-	print(self.bottomleft.x, x)
-	print(self.bottomleft.y, y)
-	print(self.background.w, w)
-	print(self.background.h, h)
-	print("Done new")
 
 	return obj
 end
