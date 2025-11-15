@@ -8,9 +8,9 @@ local function iscorrecttexture(event, index, w, h, offset, data)
 end
 
 local function log(msg)
-	local year, month, day, hour, minute, second = bolt.datetime()
+	local _, _, _, hour, minute, second = bolt.datetime()
 
-	print(string.format("[%s:%s:%s]", tostring(hour), tostring(minute), tostring(second)) .. msg)
+	print(string.format("[%02d:%02d:%02d]", tostring(hour), tostring(minute), tostring(second)) .. msg)
 end
 
 local function tprint(tbl, indent)
