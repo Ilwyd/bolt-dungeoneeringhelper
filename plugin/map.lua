@@ -4,6 +4,7 @@ local models = require("plugin.models")
 local bolt = require("bolt")
 local icons = require("plugin.icons")
 local stdlib = require("modules.stdlib")
+local compare = stdlib.compare
 
 Map = {
 	rooms = {}, -- Array holding room details
@@ -55,7 +56,7 @@ local function finddoortype(event)
 	local keyshape = nil
 	local colour = nil
 	for shape, data in pairs(models.keydoors.shapes) do
-		if vertexcount == data.vertcount and helpers.dotablesmatch(zerothvertpos, data.zerothvertpos) then
+		if vertexcount == data.vertcount and compare(zerothvertpos, data.zerothvertpos) then
 			keyshape = shape
 			colour = findcolour(event)
 		end
@@ -196,10 +197,7 @@ function Map:setHeldKeys(event, modelnumber)
 
 	-- Finding the key shape
 	for shape, data in pairs(icons.keys.shapes) do
-		if
-			event:modelvertexcount(modelnumber) == data.vertcount
-			and helpers.dotablesmatch(vertpos, data.zerothvertpos)
-		then
+		if event:modelvertexcount(modelnumber) == data.vertcount and compare(vertpos, data.zerothvertpos) then
 			keyshape = shape
 			break
 		end
@@ -283,7 +281,7 @@ function Map:setGatestone(event)
 
 	for gatestone, data in pairs(models.gatestones) do
 		local samevertcount = vertexcount == data.vertcount
-		local samezerothvertpos = helpers.dotablesmatch(zerothvertpos, data.zerothvertpos)
+		local samezerothvertpos = compare(zerothvertpos, data.zerothvertpos)
 		local incolourrange = helpers.iscolourinrange(zerothvertcolour, data.zerothvertcolourrange)
 
 		if incolourrange and samevertcount and samezerothvertpos then

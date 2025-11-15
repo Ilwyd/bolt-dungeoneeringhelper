@@ -13,14 +13,6 @@ local function log(msg)
 	print(string.format("[%s:%s:%s]", tostring(hour), tostring(minute), tostring(second)) .. msg)
 end
 
-local function dotablesmatch(table1, table2)
-	if table.concat(table1, "|") == table.concat(table2, "|") then
-		return true
-	end
-
-	return false
-end
-
 local function tprint(tbl, indent)
 	if not indent then
 		indent = 0
@@ -60,7 +52,6 @@ end
 return {
 	iscorrecttexture = iscorrecttexture,
 	log = log,
-	dotablesmatch = dotablesmatch,
 	tprint = tprint,
 	iscolourinrange = iscolourinrange,
 }
