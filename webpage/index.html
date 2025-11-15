@@ -1,44 +1,65 @@
-<!DOCTYPE html>
+<!doctype html>
 <body>
-    <canvas id="keys" width="100%" height="100%">
+  <canvas id="keys" width="100%" height="100%"> </canvas>
+  <script>
+    window.addEventListener("message", updateImages);
 
-    </canvas>
-    <script>
-        window.addEventListener("message", updateImages)
+    Sizes = {
+      SMALL: { x: 4, y: 4 },
+      MEDIUM: { x: 4, y: 8 },
+      LARGE: { x: 8, y: 8 },
+    };
 
-        Sizes = {
-            "SMALL": {"x": 4,"y": 4},
-            "MEDIUM": {"x": 4,"y": 8},
-            "LARGE": {"x": 8,"y": 8}
-        }
+    function updateImages(message) {
+      const messageString = new TextDecoder().decode(message.data.content);
+      const data = JSON.parse(messageString);
+      console.log(data.heldkeys);
 
-        function updateImages(message) {
-            const messageString = new TextDecoder().decode(message.data.content)
-            const data = JSON.parse(messageString)
+      const canvas = document.getElementById("keys");
+      canvas.width = window.outerWidth - 8;
+      canvas.height = window.outerHeight - 20;
+      const ctx = canvas.getContext("2d");
 
-            const canvas = document.getElementById("keys")
-            canvas.width = window.outerWidth - 8
-            canvas.height = window.outerHeight - 20
-            const ctx = canvas.getContext("2d") 
-
-            for (let x = 0; x < data.rooms.length; x++) {
-                for (let y = 0; y < data.rooms[x].length; y++) {
-                    console.log(data.rooms[x][y])
-                    if (data.rooms[x][y].hasOwnProperty("key") && !data.rooms[x][y].roomshape.startsWith("o_")) {
-                        const image = new Image()
-                        image.onload = function(event) {
-                            ctx.drawImage(image, x * 32, canvas.height - ((y + 1) * 32) + 6)
-                        }
-                        image.src = "./images/keys/" + data.rooms[x][y].key + ".png"
-                    } else if (data.rooms[x][y].hasOwnProperty("gatestone")) {
-                        const image = new Image()
-                        image.onload = function(event) {
-                          ctx.drawImage(image, x * 32, canvas.height - ((y + 1) * 32) + 6)
-                        }
-                        image.src = "./images/gatestones/" + data.rooms[x][y].gatestone + ".png"
-                    }
+      for (let x = 0; x < data.rooms.length; x++) {
+        for (let y = 0; y < data.rooms[x].length; y++) {
+          console.log(data.rooms[x][y]);
+          if (
+            data.rooms[x][y].hasOwnProperty("key") &&
+            !data.rooms[x][y].roomshape.startsWith("o_")
+          ) {
+            const image = new Image();
+            image.onload = function (event) {
+              var keyX = x * 32;
+              var keyY = canvas.height - (y + 1) * 32 + 6;
+              // If the player currently holds this key, draw a yellow outline
+              if (data.heldkeys.includes(data.rooms[x][y].key)) {
+                for (var sx = -1; sx <= 1; sx++) {
+                  for (var sy = -1; sy <= 1; sy++) {
+                    ctx.shadowColor = "yellow";
+                    ctx.shadowBlur = 0;
+                    ctx.shadowOffsetX = sx;
+                    ctx.shadowOffsetY = sy;
+                    ctx.drawImage(image, keyX, keyY);
+                  }
                 }
-            }
+              } else {
+                ctx.drawImage(image, keyX, keyY);
+              }
+              ctx.shadowOffsetX = 0;
+              ctx.shadowOffsetY = 0;
+            };
+            image.src = "./images/keys/" + data.rooms[x][y].key + ".png";
+          } else if (data.rooms[x][y].hasOwnProperty("gatestone")) {
+            const image = new Image();
+            image.onload = function (event) {
+              ctx.drawImage(image, x * 32, canvas.height - (y + 1) * 32 + 6);
+            };
+            image.src =
+              "./images/gatestones/" + data.rooms[x][y].gatestone + ".png";
+          }
         }
-    </script>
+      }
+      console.log();
+    }
+  </script>
 </body>

@@ -75,7 +75,16 @@ local function senddata()
 		return
 	end
 
-	local message = '{ "floorsize": "' .. floormap.size .. '", "rooms": ' .. json.encode(floormap.rooms) .. "}"
+	local message = "{"
+		.. '"floorsize": "'
+		.. floormap.size
+		.. '", '
+		.. '"rooms": '
+		.. json.encode(floormap.rooms)
+		.. ", "
+		.. '"heldkeys": '
+		.. json.encode(floormap.heldkeys)
+		.. "}"
 
 	browser:sendmessage(message)
 end
@@ -128,6 +137,16 @@ local statemachine = machine.create({
 		end,
 	},
 })
+
+bolt.onrendericon(function(event)
+	if statemachine:is("indungeon") then
+		local wasupdated = floormap:updateicon(event)
+
+		if not updated then
+			updated = wasupdated
+		end
+	end
+end)
 
 bolt.onrender3d(function(event)
 	if statemachine:is("notindungeon") then

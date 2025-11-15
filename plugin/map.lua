@@ -2,6 +2,8 @@ local textures = require("plugin.textures")
 local helpers = require("plugin.helpers")
 local models = require("plugin.models")
 local bolt = require("bolt")
+local icons = require("plugin.icons")
+local stdlib = require("plugin.stdlib")
 
 Map = {
 	rooms = {}, -- Array holding room details
@@ -10,6 +12,7 @@ Map = {
 	basetile = { x = -1, z = -1 }, -- The base tile of the south east region of the instance
 	playerroom = { x = -1, y = -1 }, -- The player's current room
 	background = { w = -1, h = -1 }, -- The width / height of the dungeonmap's background
+	heldkeys = {}, -- Array holding a list of keys that the player has
 }
 Map.__index = Map
 
@@ -170,6 +173,69 @@ function Map:update3d(event)
 	end
 
 	return keysupdated or gatestoneupdated
+end
+
+function Map:updateicon(event)
+	local keysupdated = false
+
+	for model = 1, event:modelcount() do
+		local updated = Map:setHeldKeys(event, model)
+
+		keysupdated = updated or keysupdated
+	end
+
+	return keysupdated
+end
+
+function Map:setHeldKeys(event, modelnumber)
+	local keyshape
+	local keycolour
+
+	local mx, my, mz = event:modelvertexpoint(modelnumber, 1):get()
+	local vertpos = { mx, my, mz }
+
+	-- Finding the key shape
+	for shape, data in pairs(icons.keys.shapes) do
+		if
+			event:modelvertexcount(modelnumber) == data.vertcount
+			and helpers.dotablesmatch(vertpos, data.zerothvertpos)
+		then
+			keyshape = shape
+			break
+		end
+	end
+
+	if keyshape == nil then
+		return false
+	end
+
+	local r, g, b, _ = event:modelvertexcolour(modelnumber, icons.keys.shapes[keyshape].vertindex + 1)
+	local vertexcolour = {
+		r = math.floor(r * 255 + 0.5),
+		g = math.floor(g * 255 + 0.5),
+		b = math.floor(b * 255 + 0.5),
+	}
+
+	-- Finding the key colour
+	for colour, data in pairs(icons.keys.colours) do
+		if helpers.iscolourinrange(vertexcolour, data.colourrange) then
+			keycolour = colour
+		end
+	end
+
+	if keycolour == nil then
+		return false
+	end
+
+	local key = keycolour .. keyshape
+
+	-- Return false if this key is already in the key list
+	if stdlib.table.has(self.heldkeys, key) then
+		return false
+	end
+
+	table.insert(self.heldkeys, key)
+	return true
 end
 
 function Map:setRoomKeys(event)
