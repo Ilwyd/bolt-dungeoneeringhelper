@@ -51,8 +51,8 @@ local keydoors = {
 		gold = {
 			zerothvertcolourrange = {
 				r = { 221, 222 },
-				g = { 184, 185 },
-				b = { 118, 121 },
+				g = { 184, 186 },
+				b = { 118, 122 },
 			},
 		},
 		green = {
