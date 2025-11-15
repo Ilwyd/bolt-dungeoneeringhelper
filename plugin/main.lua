@@ -2,9 +2,9 @@ local bolt = require("bolt")
 local models = require("plugin.models")
 local textures = require("plugin.textures")
 local helpers = require("plugin.helpers")
-local machine = require("plugin.statemachine")
+local machine = require("modules.statemachine")
 local map = require("plugin.map")
-local json = require("plugin.json")
+local json = require("modules.json")
 
 local floormap = nil
 local browser = nil

@@ -3,7 +3,7 @@ local helpers = require("plugin.helpers")
 local models = require("plugin.models")
 local bolt = require("bolt")
 local icons = require("plugin.icons")
-local stdlib = require("plugin.stdlib")
+local stdlib = require("modules.stdlib")
 
 Map = {
 	rooms = {}, -- Array holding room details
