@@ -139,7 +139,7 @@ local statemachine = machine.create({
 })
 
 bolt.onrendericon(function(event)
-	if statemachine:is("indungeon") then
+	if statemachine:is("indungeon") and floormap ~= nil then
 		local wasupdated = floormap:updateicon(event)
 
 		if not updated then
