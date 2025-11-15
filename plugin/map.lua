@@ -2,6 +2,7 @@ local textures = require("plugin.textures")
 local helpers = require("plugin.helpers")
 local models = require("plugin.models")
 local bolt = require("bolt")
+local json = require("plugin.json")
 
 Map = {
 	rooms = {}, -- Array holding room details
@@ -83,10 +84,10 @@ local function getDirection(originx, originz, targetx, targetz)
 	}
 end
 
-local generateMap = {
-	small = generateEmptyMap(4, 4),
-	medium = generateEmptyMap(4, 8),
-	large = generateEmptyMap(8, 8),
+local mapSizes = {
+	small = { x = 4, y = 4 },
+	medium = { x = 4, y = 8 },
+	large = { x = 8, y = 8 },
 }
 
 function Map:new(size, x, y, w, h)
@@ -94,11 +95,20 @@ function Map:new(size, x, y, w, h)
 	setmetatable(obj, Map)
 
 	self.size = size
-	self.rooms = generateMap[size]
+	self.rooms = generateEmptyMap(mapSizes[size].x, mapSizes[size].y)
 	self.bottomleft.x = x
 	self.bottomleft.y = y
 	self.background.w = w
 	self.background.h = h
+
+	print("New")
+	print(self.size, size)
+	print(json.encode(self.rooms))
+	print(self.bottomleft.x, x)
+	print(self.bottomleft.y, y)
+	print(self.background.w, w)
+	print(self.background.h, h)
+	print("Done new")
 
 	return obj
 end
