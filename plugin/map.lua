@@ -233,6 +233,9 @@ function Map:setHeldKeys(event, modelnumber)
 	end
 
 	table.insert(self.heldkeys, key)
+
+	helpers.log("Picked up key: " .. key)
+
 	return true
 end
 
@@ -259,6 +262,9 @@ function Map:setRoomKeys(event)
 
 	if self.rooms[lockedroomcoords.x][lockedroomcoords.y]["key"] ~= key then
 		self.rooms[lockedroomcoords.x][lockedroomcoords.y]["key"] = key
+
+		helpers.log("Found room locked by " .. key .. " at " .. lockedroomcoords.x .. ", " .. lockedroomcoords.y)
+
 		return true
 	end
 
@@ -294,6 +300,8 @@ function Map:setGatestone(event)
 			if self.rooms[roomcoords.x][roomcoords.y]["gatestone"] ~= gatestone then
 				self:clearGatestone(gatestone)
 				self.rooms[roomcoords.x][roomcoords.y]["gatestone"] = gatestone
+
+				helpers.log("Found " .. gatestone .. " in room " .. roomcoords.x .. ", " .. roomcoords.y)
 
 				return true
 			else
@@ -354,6 +362,8 @@ function Map:setRegionBase()
 		x = currRegionBase.x - (regionOffsetX * 64),
 		z = currRegionBase.z - (regionOffsetZ * 64),
 	}
+
+	helpers.log("Dungeon's base tile set to: " .. self.basetile.x .. ", " .. self.basetile.z)
 end
 
 function Map:getRoomCenter(x, y)
