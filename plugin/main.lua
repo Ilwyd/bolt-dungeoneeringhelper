@@ -121,7 +121,7 @@ local statemachine = machine.create({
 				floormap.background.h,
 				"plugin://webpage/index.html"
 			)
-			browser:showdevtools()
+			-- browser:showdevtools()
 		end,
 
 		-- When the player leaves the dungeon:
