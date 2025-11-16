@@ -108,23 +108,6 @@ function Map:new(size, x, y, w, h)
 	return obj
 end
 
-function Map:toString()
-	local outstring = ""
-	for x = 1, #self.rooms do
-		local rowstring = ""
-		for y = 1, #self.rooms[x] do
-			if next(self.rooms[x][y]) == nil then
-				rowstring = rowstring .. " " .. "x"
-			else
-				rowstring = rowstring .. " " .. "o"
-			end
-		end
-		rowstring = rowstring .. "\n"
-		outstring = outstring .. rowstring
-	end
-	return outstring
-end
-
 function Map:update(event)
 	local updatedshape = false
 
@@ -143,6 +126,8 @@ function Map:update(event)
 			if isroomtexture and self.rooms[mapx][mapy].roomshape ~= name then
 				self.rooms[mapx][mapy].roomshape = name
 				updatedshape = true
+
+				helpers.log("Room " .. mapx .. ", " .. mapy .. " updated to " .. name)
 			end
 		end
 
