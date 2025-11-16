@@ -1,16 +1,8 @@
-local bolt = require("bolt")
-
 local function iscorrecttexture(event, index, w, h, offset, data)
 	local ax, ay, aw, ah = event:vertexatlasdetails(index)
 	if aw == w and ah == h and event:texturecompare(ax, ay + offset, data) then
 		return true
 	end
-end
-
-local function log(msg)
-	local _, _, _, hour, minute, second = bolt.datetime()
-
-	print(string.format("[%02d:%02d:%02d]", tostring(hour), tostring(minute), tostring(second)) .. " " .. msg)
 end
 
 local function tprint(tbl, indent)
@@ -51,7 +43,6 @@ end
 
 return {
 	iscorrecttexture = iscorrecttexture,
-	log = log,
 	tprint = tprint,
 	iscolourinrange = iscolourinrange,
 }

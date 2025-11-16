@@ -1,10 +1,10 @@
 local bolt = require("bolt")
-local models = require("plugin.models")
 local textures = require("plugin.textures")
 local helpers = require("plugin.helpers")
 local machine = require("modules.statemachine")
 local map = require("plugin.map")
 local json = require("modules.json")
+local log = require("plugin.logger").log
 
 local floormap = nil
 local browser = nil
@@ -99,7 +99,7 @@ local statemachine = machine.create({
 	},
 	callbacks = {
 		onstatechange = function(self, event, from, to)
-			helpers.log("State changed from " .. from .. " to " .. to)
+			log("State changed from " .. from .. " to " .. to)
 		end,
 
 		onindungeonnomap = function(self, event, from, to) end,
