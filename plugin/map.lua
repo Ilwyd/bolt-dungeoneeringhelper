@@ -167,6 +167,11 @@ function Map:update3d(event)
 	local keysupdated = false
 	local gatestoneupdated = false
 
+	-- Don't start attempting to look for 3d updates until we've found the base tile
+	if self.basetile.x == -1 or self.basetile.z == -1 then
+		return false
+	end
+
 	if event:animated() then
 		keysupdated = self:setRoomKeys(event)
 	else
