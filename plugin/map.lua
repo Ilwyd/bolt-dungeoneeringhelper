@@ -103,6 +103,7 @@ function Map:new(size, x, y, w, h)
 	self.bottomleft.y = y
 	self.background.w = w
 	self.background.h = h
+	self.heldkeys = {}
 
 	return obj
 end
