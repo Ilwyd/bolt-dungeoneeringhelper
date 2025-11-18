@@ -121,15 +121,16 @@ function Map:update(event)
 		local mapx = math.floor(xoffset / 32)
 		local mapy = math.abs(math.floor(yoffset / 32))
 
-		-- Updating the map table with the shape of the room (if any)
-		for name, data in pairs(textures.dungeonmap.rooms) do
-			local isroomtexture = helpers.iscorrecttexture(event, i, data.w, data.h, data.offset, data.data)
-			if isroomtexture and self.rooms[mapx][mapy].roomshape ~= name then
-				self.rooms[mapx][mapy].roomshape = name
-				updatedshape = true
+		local ax, ay, aw, _ = event:vertexatlasdetails(i)
 
-				log("Room " .. mapx .. ", " .. mapy .. " updated to " .. name)
-			end
+		-- Updating the map table with the shape of the room (if any)
+		local texturedata = event:texturedata(ax, ay + textures.dungeonmap.rooms.offset, aw * 4)
+		local roomdetails = textures.dungeonmap.rooms[texturedata]
+		if roomdetails and self.rooms[mapx][mapy].roomshape ~= roomdetails.roomshape then
+			self.rooms[mapx][mapy].roomshape = roomdetails.roomshape
+			updatedshape = true
+
+			log("Room " .. mapx .. ", " .. mapy .. " updated to " .. roomdetails.roomshape)
 		end
 
 		-- Setting the player's room based on the map if basetile hasn't been found yet, otherwise use player position
