@@ -10,6 +10,10 @@ local floormap = nil
 local browser = nil
 local updated = false
 local isplayerindungeon = false
+local prevbasetile = {
+	x = -1,
+	z = -1,
+}
 
 --- Find the floorsize from the given Batch2D event, if any
 --- @param event any The Batch2D event to be checked for the floorsize
@@ -130,6 +134,7 @@ local statemachine = machine.create({
 		-- Set the floormap to nil
 		-- Get rid of the browser overlay on the map
 		onleftdungeon = function(self, event, from, to)
+			prevbasetile = floormap.basetile
 			floormap = nil
 
 			if browser ~= nil then
@@ -182,7 +187,7 @@ bolt.onrender2d(function(event)
 		if floorsize ~= nil then
 			-- If floormap is not nil it's because the map was hidden. Don't want to replace it in that case
 			if floormap == nil then
-				floormap = Map:new(floorsize.size, floorsize.x, floorsize.y, floorsize.w, floorsize.h)
+				floormap = Map:new(floorsize.size, floorsize.x, floorsize.y, floorsize.w, floorsize.h, prevbasetile)
 			end
 
 			statemachine:foundmap()

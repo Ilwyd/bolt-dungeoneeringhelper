@@ -15,6 +15,7 @@ Map = {
 	playerroom = { x = -1, y = -1 }, -- The player's current room
 	background = { w = -1, h = -1 }, -- The width / height of the dungeonmap's background
 	heldkeys = {}, -- Array holding a list of keys that the player has
+	prevbasetile = { x = -1, z = -1 }, -- The base tile of the previous dungeon
 }
 Map.__index = Map
 
@@ -94,7 +95,7 @@ local mapSizes = {
 	large = { x = 8, y = 8 },
 }
 
-function Map:new(size, x, y, w, h)
+function Map:new(size, x, y, w, h, prev)
 	local obj = {}
 	setmetatable(obj, Map)
 
@@ -105,6 +106,9 @@ function Map:new(size, x, y, w, h)
 	self.background.w = w
 	self.background.h = h
 	self.heldkeys = {}
+	self.basetile = { x = -1, z = -1 }
+	self.prevbasetile = prev
+	self.playerroom = { x = -1, y = -1 }
 
 	return obj
 end
@@ -351,10 +355,17 @@ function Map:setRegionBase()
 	local regionOffsetX = math.floor((self.playerroom.x - 1) / 4)
 	local regionOffsetZ = math.floor((self.playerroom.y - 1) / 4)
 
-	self.basetile = {
+	local basetile = {
 		x = currRegionBase.x - (regionOffsetX * 64),
 		z = currRegionBase.z - (regionOffsetZ * 64),
 	}
+
+	-- Basetile should change between dungeons. This means we're checking too early
+	if compare(basetile, self.prevbasetile) then
+		return
+	end
+
+	self.basetile = basetile
 
 	log("Dungeon's base tile set to: " .. self.basetile.x .. ", " .. self.basetile.z)
 end
