@@ -1,6 +1,6 @@
 {
   "name": "Dungeoneering Helper",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A plugin to help with Dungeoneering",
   "main": "plugin/main.lua"
 }
