@@ -138,17 +138,17 @@ local gatestones = {
 		zerothvertpos = { 40, 76, 36 },
 		zerothvertcolourrange = {
 			r = { 63, 66 },
-			g = { 95, 97 },
-			b = { 124, 126 },
+			g = { 94, 97 },
+			b = { 123, 126 },
 		},
 	},
 	gatestone = {
 		vertcount = 585,
 		zerothvertpos = { 40, 76, 36 },
 		zerothvertcolourrange = {
-			r = { 73, 75 },
-			g = { 116, 118 },
-			b = { 103, 105 },
+			r = { 72, 75 },
+			g = { 115, 118 },
+			b = { 102, 105 },
 		},
 	},
 }
