@@ -75,6 +75,8 @@ local function senddata()
 		return
 	end
 
+	log(json.encode(floormap.rooms))
+
 	local message = "{"
 		.. '"floorsize": "'
 		.. floormap.size

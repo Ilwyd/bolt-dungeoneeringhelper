@@ -3,6 +3,8 @@ local function iscorrecttexture(event, index, w, h, offset, data)
 	if aw == w and ah == h and event:texturecompare(ax, ay + offset, data) then
 		return true
 	end
+
+	return false
 end
 
 local function tprint(tbl, indent)
