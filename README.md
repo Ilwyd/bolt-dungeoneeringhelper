@@ -22,3 +22,6 @@ Skip to step 7 if you already know how to install Bolt plugins using the URL abo
 - Currently the overlay placed on the dungeoneering map only works with 100% interface scaling.
 - The plugin hasn't been tested on Warped floors, as I don't have access to them at the moment. Contributions are appriciated, even just providing data using Adamcake's [bolt-devplugin](https://github.com/Adamcake/bolt-devplugin).
 - Same as above, the second gatestone isn't working at the moment, as I don't have access to it.
+
+## Disclaimer
+While it is entirely within RuneScape's TOS (as far as we know), Jagex has not yet acknowledged the Bolt Launcher's plugin system. Use this plugin (and others) at your own risk.
