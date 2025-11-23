@@ -24,4 +24,4 @@ Skip to step 7 if you already know how to install Bolt plugins using the URL abo
 - Same as above, the second gatestone isn't working at the moment, as I don't have access to it.
 
 ## Disclaimer
-While it is entirely within RuneScape's TOS (as far as we know), Jagex has not yet acknowledged the Bolt Launcher's plugin system. Use this plugin (and others) at your own risk.
+While it is entirely within RuneScape's TOS, Jagex has not yet acknowledged the Bolt Launcher's plugin system. Use this plugin (and others) at your own risk.
