@@ -20,6 +20,9 @@ Skip to step 7 if you already know how to install Bolt plugins using the URL abo
 
 ## Notes
 - Currently the overlay placed on the dungeoneering map only works with 100% interface scaling.
+- Certain settings may cause issues with how Bolt finds the player's position, which is needed for figuring out how models in the word correspond to the map
+  - Using high contrast mode or entity highlight with silhouette instead of border
+  - Certain outfit overrides can also cause issues. So far I'm aware of [Renegade Chestpiece](https://runescape.wiki/w/Renegade_Chestpiece) and [Radiant Crusader Platebody](https://runescape.wiki/w/Radiant_Crusader_Platebody) doing this, however there may be others.
 - The plugin hasn't been tested on Warped floors, as I don't have access to them at the moment. Contributions are appriciated, even just providing data using Adamcake's [bolt-devplugin](https://github.com/Adamcake/bolt-devplugin).
 - Same as above, the second gatestone isn't working at the moment, as I don't have access to it.
 
