@@ -33,7 +33,7 @@ local function generateEmptyMap(x, y)
 end
 
 local function findcolour(event)
-	local r, g, b, _ = event:vertexcolour(0)
+	local r, g, b, _ = event:vertexcolour(1)
 	local zerothvertcolour = {
 		r = math.floor(r * 255 + 0.5),
 		g = math.floor(g * 255 + 0.5),
@@ -52,7 +52,7 @@ end
 --- @return { colour: string, shape: string }
 local function finddoortype(event)
 	local vertexcount = event:vertexcount()
-	local mx, my, mz = event:vertexpoint(0):get()
+	local mx, my, mz = event:vertexpoint(1):get()
 	local zerothvertpos = { mx, my, mz }
 
 	local keyshape = nil
@@ -270,9 +270,9 @@ end
 
 function Map:setGatestone(event)
 	local vertexcount = event:vertexcount()
-	local modelpoint = event:vertexpoint(0)
+	local modelpoint = event:vertexpoint(1)
 
-	local mx, my, mz = event:vertexpoint(0):get()
+	local mx, my, mz = event:vertexpoint(1):get()
 	local zerothvertpos = { mx, my, mz }
 
 	local r, g, b, _ = event:vertexcolour(1)
