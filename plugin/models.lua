@@ -146,7 +146,7 @@ local gatestones = {
 		vertcount = 585,
 		zerothvertpos = { 40, 76, 36 },
 		zerothvertcolourrange = {
-			r = { 72, 75 },
+			r = { 72, 76 },
 			g = { 115, 118 },
 			b = { 102, 105 },
 		},
