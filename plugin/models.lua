@@ -151,6 +151,15 @@ local gatestones = {
 			b = { 102, 105 },
 		},
 	},
+	gatestone2 = {
+		vertcount = 585,
+		zerothvertpos = { 40, 76, 36 },
+		zerothvertcolourrange = {
+			r = { 104, 104 },
+			g = { 36, 36 },
+			b = { 32, 32 },
+		},
+	},
 }
 
 return {
