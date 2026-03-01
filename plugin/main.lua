@@ -134,7 +134,9 @@ local statemachine = machine.create({
 		-- Set the floormap to nil
 		-- Get rid of the browser overlay on the map
 		onleftdungeon = function(self, event, from, to)
-			prevbasetile = floormap.basetile
+			if floormap ~= nil then
+				prevbasetile = floormap.basetile
+			end
 			floormap = nil
 
 			if browser ~= nil then
