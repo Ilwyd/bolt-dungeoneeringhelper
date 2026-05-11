@@ -1,4 +1,4 @@
-This plugin is no longer receiving updates, as Jagex is building its functionality into the game in the near future. It should continue working until then.
+# This plugin is no longer receiving updates, as Jagex added its functionality into the game. It will no longer function as expected.
 
 Dungeoneering Helper is a [Bolt](https://github.com/adamcake/Bolt) plugin that provides an overlay of required keys on the dungeoneering map. The ultimate goal is to have this plugin mimic how [Alt1's DGKey](https://runeapps.org/dgkey) works, however I make no promises on that actually happening, specifically the multiplayer aspect
 
